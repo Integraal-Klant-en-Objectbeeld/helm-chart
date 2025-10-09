@@ -53,7 +53,7 @@ spec:
             {{- include "iko.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
           ports:
-            - name: http
+            - name: admin-port
               containerPort: 8080
               protocol: TCP
 

@@ -7,6 +7,7 @@ metadata:
 data:
   # Spring Boot configuratie
   SPRING_PROFILES_ACTIVE: {{ .Values.settings.spring.profiles.active | quote }}
+  SPRINGACTUATOR_USERNAME: {{ .Values.settings.spring.actuator.username | quote }}
   SERVER_PORT: {{ .Values.settings.iko.serverPort | quote }}
   
   # Database configuratie
@@ -22,18 +23,18 @@ data:
   
   # IKO bronnen configuratie
   IKO_CONNECTORS_BRP_ENABLED: {{ .Values.settings.iko.connectors.brp.enabled | quote }}
-  IKO_CONNECTORS_BRP_HOST: {{ .Values.settings.iko.connectors.brp.host | quote }}
+  IKO_CONNECTORS_BRP_HOST: {{ if .Values.settings.iko.connectors.brp.enabled }} {{ required "You must set settings.iko.connectors.brp.host" .Values.settings.iko.connectors.brp.host | quote }} {{ end }}
   IKO_CONNECTORS_BRP_SPECIFICATIONURI: {{ .Values.settings.iko.connectors.brp.specificationuri | quote }}
   IKO_CONNECTORS_OBJECTENAPI_ENABLED: {{ .Values.settings.iko.connectors.objects.enabled | quote }}
-  IKO_CONNECTORS_OBJECTENAPI_HOST: {{ .Values.settings.iko.connectors.objects.host | quote }}
+  IKO_CONNECTORS_OBJECTENAPI_HOST: {{ if .Values.settings.iko.connectors.objects.enabled }} {{ required "You must set settings.iko.connectors.objects.host" .Values.settings.iko.connectors.objects.host | quote }} {{ end }}
   IKO_CONNECTORS_OBJECTENAPI_SPECIFICATIONURI: {{ .Values.settings.iko.connectors.objects.specificationuri | default (printf "%s/api/v2/schema/openapi.yaml" .Values.settings.iko.connectors.objects.host) | quote }}
   IKO_CONNECTORS_OPENZAAK_ENABLED: {{ .Values.settings.iko.connectors.openzaak.enabled | quote }}
-  IKO_CONNECTORS_OPENZAAK_HOST: {{ .Values.settings.iko.connectors.openzaak.host | quote }}
+  IKO_CONNECTORS_OPENZAAK_HOST: {{ if .Values.settings.iko.connectors.openzaak.enabled }} {{ required "You must set settings.iko.connectors.openzaak.host" .Values.settings.iko.connectors.openzaak.host | quote }} {{ end }}
   IKO_CONNECTORS_OPENZAAK_CLIENTID: {{ .Values.settings.iko.connectors.openzaak.clientId | quote }}
   IKO_CONNECTORS_OPENZAAK_SPECIFICATIONURI: {{ .Values.settings.iko.connectors.openzaak.specificationuri | default ( printf "%s/zaken/api/v1/schema/openapi.yaml" .Values.settings.iko.connectors.openzaak.host ) | quote }}
   IKO_CONNECTORS_BAG_ENABLED: {{ .Values.settings.iko.connectors.bag.enabled | quote }}
-  IKO_CONNECTORS_BAG_HOST: {{ .Values.settings.iko.connectors.bag.host | quote }}
+  IKO_CONNECTORS_BAG_HOST: {{ if .Values.settings.iko.connectors.bag.enabled }} {{ required "You must set iko.connectors.bag.host" .Values.settings.iko.connectors.bag.host | quote }} {{ end }}
   IKO_CONNECTORS_BAG_SPECIFICATIONURI: {{ .Values.settings.iko.connectors.bag.specificationuri | default ( printf "%s/lvbag/individuelebevragingen/v2/openapi.yaml" .Values.settings.iko.connectors.bag.host ) | quote }}
   IKO_CONNECTORS_OPENKLANT_ENABLED: {{ .Values.settings.iko.connectors.openklant.enabled | quote }}
-  IKO_CONNECTORS_OPENKLANT_HOST: {{ .Values.settings.iko.connectors.openklant.host | quote }}
-  IKO_CONNECTORS_OPENKLANT_SPECIFICATIONURI: {{ .Values.settings.iko.connectors.openklant.specificationuri | default ( printf "%s/api/v2/schema/openapi.yaml" .Values.settings.iko.connectors.openklant.host ) | quote }}
+  IKO_CONNECTORS_OPENKLANT_HOST: {{ if .Values.settings.iko.connectors.openklant.enabled }} {{ required "You must set settings.iko.connectors.openklant.host" .Values.settings.iko.connectors.openklant.host | quote }} {{ end }}
+  IKO_CONNECTORS_OPENKLANT_SPECIFICATIONURI: {{ .Values.settings.iko.connectors.openklant.specificationuri | default ( printf "%s/klantinteracties/api/v1/schema/openapi.yaml" .Values.settings.iko.connectors.openklant.host ) | quote }}
