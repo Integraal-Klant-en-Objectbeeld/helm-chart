@@ -200,6 +200,7 @@ settings:
     serverPort: 8080
 
     # -- Base64-encoded 256-bit random key for AES encryption
+    # -- Generate a key, by e.g.: openssl rand -base64 32
     # -- Or, if using existingSecret: `IKO_CRYPTO_KEY`
     cryptoKey: ""
     connectors:
