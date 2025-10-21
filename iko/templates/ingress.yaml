@@ -1,12 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "iko.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- $management := .Values.service.management -}}
-{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
-  {{- end }}
-{{- end }}
+
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -55,22 +50,6 @@ spec:
                   number: {{ $svcPort }}
               {{- else }}
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
-              {{- end }}
-          {{- end }}
-          {{- if $management }}
-          - path: "/management/(.*)"
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: ImplementationSpecific
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ printf "%s-management" ($fullName) }}
-                port:
-                  number: {{ $svcPort }}
-              {{- else }}
-              serviceName: {{ printf "%s-management" ($fullName) }}
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}

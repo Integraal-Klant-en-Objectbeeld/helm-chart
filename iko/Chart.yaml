@@ -1,6 +1,6 @@
 apiVersion: v2
-appVersion: 0.2.0
+appVersion: 0.3.0
 description: A Helm chart for Integraal Klant Objectbeeld (IKO)
 name: iko
 type: application
-version: 0.2.1
+version: 0.3.0
