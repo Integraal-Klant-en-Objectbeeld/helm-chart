@@ -1,6 +1,6 @@
 # iko
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.0](https://img.shields.io/badge/AppVersion-0.5.0-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -9,11 +9,13 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
+| args | list | `[]` | Override default container args |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | autoscaling.targetMemoryUtilizationPercentage | string | `nil` |  |
+| command | list | `[]` | Override default container command |
 | existingSecret | string | `nil` |  |
 | extraEnvVars | list | `[]` | Extra environment variables to inject into the container |
 | extraVolumeMounts | list | `[]` | Additional volume mounts for the main container |
@@ -80,27 +82,6 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | If not set and create is true, a name is generated using the fullname template |
-| settings.iko.connectors.bag.apikey | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_BAG_APIKEY` |
-| settings.iko.connectors.bag.enabled | bool | `true` | Enable the BAG connector |
-| settings.iko.connectors.bag.host | string | `""` | URL of the BAG service |
-| settings.iko.connectors.bag.specificationuri | string | `"https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml"` | BAG specification URL |
-| settings.iko.connectors.brp.enabled | bool | `true` | Enable the BRP connector |
-| settings.iko.connectors.brp.host | string | `""` | URL of the BRP service |
-| settings.iko.connectors.brp.secret | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_BRP_SECRET` |
-| settings.iko.connectors.brp.specificationuri | string | `"https://developer.rvig.nl/brp-api/personen/_attachments/openapi.yaml"` |  |
-| settings.iko.connectors.objects.enabled | bool | `true` | Enable the Objects connector |
-| settings.iko.connectors.objects.host | string | `""` | URL of the Objects service |
-| settings.iko.connectors.objects.specificationuri | string | `"https://raw.githubusercontent.com/maykinmedia/objects-api/3.1.2/src/objects/api/v2/openapi.yaml"` | OpenAPI specification URL for the Objects service |
-| settings.iko.connectors.objects.token | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_OBJECTENAPI_TOKEN` |
-| settings.iko.connectors.openklant.enabled | bool | `true` | Enable the Open Klant connector |
-| settings.iko.connectors.openklant.host | string | `""` | URL of the Open Klant service |
-| settings.iko.connectors.openklant.specificationuri | string | `"https://raw.githubusercontent.com/maykinmedia/open-klant/2.10.0/src/openklant/components/klantinteracties/openapi.yaml"` | OpenAPI specification URL for the Open Klant service |
-| settings.iko.connectors.openklant.token | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_OPENKLANT_TOKEN` |
-| settings.iko.connectors.openzaak.clientId | string | `""` | Client ID used to authenticate with Open Zaak |
-| settings.iko.connectors.openzaak.enabled | bool | `true` | Enable the Open Zaak connector |
-| settings.iko.connectors.openzaak.host | string | `""` | URL of the Open Zaak service |
-| settings.iko.connectors.openzaak.secret | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_OPENZAAK_SECRET` |
-| settings.iko.connectors.openzaak.specificationuri | string | `"https://raw.githubusercontent.com/vng-Realisatie/zaken-api/1.5.1/src/openapi.yaml"` | OpenZaak specification URL |
 | settings.iko.cryptoKey | string | `""` | Or, if using existingSecret: `IKO_CRYPTO_KEY` |
 | settings.iko.serverPort | int | `8080` | Port IKO listens on |
 | settings.keycloak.authServerURL | string | `""` | URL of Keycloak - Required |

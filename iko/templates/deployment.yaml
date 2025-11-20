@@ -43,6 +43,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.command }}
+          command: {{- include "iko.tplvalues.render" (dict "value" .Values.command "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.args }}
+          args: {{- include "iko.tplvalues.render" (dict "value" .Values.args "context" $) | nindent 12 }}
+          {{- end }}
           envFrom:
             - secretRef:
                 name: {{ .Values.existingSecret | default (include "iko.fullname" .) }}

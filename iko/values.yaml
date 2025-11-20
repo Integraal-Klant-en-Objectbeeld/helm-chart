@@ -13,6 +13,12 @@ image:
   # -- Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+# --Override default container command
+command: []
+
+# -- Override default container args
+args: []
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
