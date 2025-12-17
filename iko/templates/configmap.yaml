@@ -20,7 +20,7 @@ data:
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: {{ printf "%s/realms/%s" .Values.settings.keycloak.authServerURL .Values.settings.keycloak.realm | quote }}
 
   SPRING_DATA_REDIS_HOST: {{- if .Values.redis.enabled }}
-    {{ printf "%-redis" (include "iko.fullname" .) | quote }}
+    {{ printf "%s-redis" (include "iko.fullname" .) | quote }}
   {{- else }}
     {{ .Values.settings.redis.host | quote }}
   {{- end }}
