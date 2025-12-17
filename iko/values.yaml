@@ -171,7 +171,7 @@ monitoring:
 
 settings:
   spring:
-    datasource:
+    datasource: 
       # -- URL for the postgresql database
       url: ""
       # -- Username for the postgresql database
@@ -184,7 +184,7 @@ settings:
       properties:
         hibernateDialect: "org.hibernate.dialect.PostgreSQLDialect"
 
-  keycloak:
+  keycloak: 
     # -- URL of Keycloak - Required
     authServerURL: ""
     # -- Keycloak realm - Required
@@ -195,11 +195,34 @@ settings:
     # -- Or, if using existingSecret: `SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAKAPI_CLIENTSECRET`
     clientSecret: ""
 
+  redis:
+    host:
+    port: 
+
   iko:
     # -- Port IKO listens on
     serverPort: 8080
-
     # -- Base64-encoded 256-bit random key for AES encryption
     # -- Generate a key, by e.g.: openssl rand -base64 32
     # -- Or, if using existingSecret: `IKO_CRYPTO_KEY`
     cryptoKey: ""
+
+redis:
+  # -- Enable/disable the bundled Redis deployment
+  enabled: true
+  # -- Number of Redis replicas
+  replicaCount: 1
+  image:
+    # -- Redis image repository
+    repository: docker.io/redis
+    # -- Redis image tag
+    tag: "8.4.0"
+    # -- Redis image pull policy
+    pullPolicy: IfNotPresent
+  service:
+    # -- Port Redis listens on
+    port: 6379
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}

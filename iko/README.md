@@ -1,6 +1,6 @@
 # iko
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -69,6 +69,16 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | readinessProbe.periodSeconds | int | `10` |  |
 | readinessProbe.successThreshold | int | `1` |  |
 | readinessProbe.timeoutSeconds | int | `1` |  |
+| redis.affinity | object | `{}` |  |
+| redis.enabled | bool | `true` | Enable/disable the bundled Redis deployment |
+| redis.image.pullPolicy | string | `"IfNotPresent"` | Redis image pull policy |
+| redis.image.repository | string | `"docker.io/redis"` | Redis image repository |
+| redis.image.tag | string | `"8.4.0"` | Redis image tag |
+| redis.nodeSelector | object | `{}` |  |
+| redis.replicaCount | int | `1` | Number of Redis replicas |
+| redis.resources | object | `{}` |  |
+| redis.service.port | int | `6379` | Port Redis listens on |
+| redis.tolerations | list | `[]` |  |
 | replicaCount | int | `1` | Amount of replicas running IKO |
 | resources | object | `{}` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -80,33 +90,14 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | If not set and create is true, a name is generated using the fullname template |
-| settings.iko.connectors.bag.apikey | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_BAG_APIKEY` |
-| settings.iko.connectors.bag.enabled | bool | `true` | Enable the BAG connector |
-| settings.iko.connectors.bag.host | string | `""` | URL of the BAG service |
-| settings.iko.connectors.bag.specificationuri | string | `"https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml"` | BAG specification URL |
-| settings.iko.connectors.brp.enabled | bool | `true` | Enable the BRP connector |
-| settings.iko.connectors.brp.host | string | `""` | URL of the BRP service |
-| settings.iko.connectors.brp.secret | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_BRP_SECRET` |
-| settings.iko.connectors.brp.specificationuri | string | `"https://developer.rvig.nl/brp-api/personen/_attachments/openapi.yaml"` |  |
-| settings.iko.connectors.objects.enabled | bool | `true` | Enable the Objects connector |
-| settings.iko.connectors.objects.host | string | `""` | URL of the Objects service |
-| settings.iko.connectors.objects.specificationuri | string | `"https://raw.githubusercontent.com/maykinmedia/objects-api/3.1.2/src/objects/api/v2/openapi.yaml"` | OpenAPI specification URL for the Objects service |
-| settings.iko.connectors.objects.token | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_OBJECTENAPI_TOKEN` |
-| settings.iko.connectors.openklant.enabled | bool | `true` | Enable the Open Klant connector |
-| settings.iko.connectors.openklant.host | string | `""` | URL of the Open Klant service |
-| settings.iko.connectors.openklant.specificationuri | string | `"https://raw.githubusercontent.com/maykinmedia/open-klant/2.10.0/src/openklant/components/klantinteracties/openapi.yaml"` | OpenAPI specification URL for the Open Klant service |
-| settings.iko.connectors.openklant.token | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_OPENKLANT_TOKEN` |
-| settings.iko.connectors.openzaak.clientId | string | `""` | Client ID used to authenticate with Open Zaak |
-| settings.iko.connectors.openzaak.enabled | bool | `true` | Enable the Open Zaak connector |
-| settings.iko.connectors.openzaak.host | string | `""` | URL of the Open Zaak service |
-| settings.iko.connectors.openzaak.secret | string | `""` | Or, if using existingSecret: `IKO_CONNECTORS_OPENZAAK_SECRET` |
-| settings.iko.connectors.openzaak.specificationuri | string | `"https://raw.githubusercontent.com/vng-Realisatie/zaken-api/1.5.1/src/openapi.yaml"` | OpenZaak specification URL |
 | settings.iko.cryptoKey | string | `""` | Or, if using existingSecret: `IKO_CRYPTO_KEY` |
 | settings.iko.serverPort | int | `8080` | Port IKO listens on |
 | settings.keycloak.authServerURL | string | `""` | URL of Keycloak - Required |
 | settings.keycloak.clientID | string | `""` | Client-ID to connect with Keycloak |
 | settings.keycloak.clientSecret | string | `""` | Or, if using existingSecret: `SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAKAPI_CLIENTSECRET` |
 | settings.keycloak.realm | string | `""` | Keycloak realm - Required |
+| settings.redis.host | string | `nil` |  |
+| settings.redis.port | string | `nil` |  |
 | settings.spring.datasource.driverClassName | string | `"org.postgresql.Driver"` | Driver for the postgresql database |
 | settings.spring.datasource.password | string | `"TOPSECRET"` | Password for the postgresql database |
 | settings.spring.datasource.url | string | `""` | URL for the postgresql database |
