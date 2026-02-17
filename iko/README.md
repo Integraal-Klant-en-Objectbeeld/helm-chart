@@ -1,6 +1,6 @@
 # iko
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -91,10 +91,10 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | If not set and create is true, a name is generated using the fullname template |
 | settings.iko.cryptoKey | string | `""` | Or, if using existingSecret: `IKO_CRYPTO_KEY` |
-| settings.iko.serverPort | int | `8080` | Port IKO listens on |
 | settings.iko.security.admin.authorities | string | `"ROLE_ADMIN"` | Required admin roles/authorities (comma-separated) |
 | settings.iko.security.admin.rolesClaim | string | `"realm_access.roles"` | Claim containing admin roles in OIDC login tokens |
 | settings.iko.security.api.authoritiesClaim | string | `"resource_access.iko.roles"` | Claim containing API authorities in JWT access tokens |
+| settings.iko.serverPort | int | `8080` | Port IKO listens on |
 | settings.keycloak.authServerURL | string | `""` | URL of Keycloak - Required |
 | settings.keycloak.clientID | string | `""` | Client-ID to connect with Keycloak |
 | settings.keycloak.clientSecret | string | `""` | Or, if using existingSecret: `SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAKAPI_CLIENTSECRET` |
