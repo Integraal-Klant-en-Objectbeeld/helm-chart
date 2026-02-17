@@ -202,6 +202,15 @@ settings:
   iko:
     # -- Port IKO listens on
     serverPort: 8080
+    security:
+      admin:
+        # -- Claim containing admin roles in OIDC login tokens
+        rolesClaim: "realm_access.roles"
+        # -- Required admin roles/authorities (comma-separated)
+        authorities: "ROLE_ADMIN"
+      api:
+        # -- Claim containing API authorities in JWT access tokens
+        authoritiesClaim: "resource_access.iko.roles"
     # -- Base64-encoded 256-bit random key for AES encryption
     # -- Generate a key, by e.g.: openssl rand -base64 32
     # -- Or, if using existingSecret: `IKO_CRYPTO_KEY`

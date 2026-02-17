@@ -18,6 +18,9 @@ data:
   SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUERURI: {{ printf "%s/realms/%s" .Values.settings.keycloak.authServerURL .Values.settings.keycloak.realm | quote }}
   SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENTID: {{ .Values.settings.keycloak.clientID | quote }}
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: {{ printf "%s/realms/%s" .Values.settings.keycloak.authServerURL .Values.settings.keycloak.realm | quote }}
+  IKO_SECURITY_ADMIN_ROLESCLAIM: {{ .Values.settings.iko.security.admin.rolesClaim | quote }}
+  IKO_SECURITY_ADMIN_AUTHORITIES: {{ .Values.settings.iko.security.admin.authorities | quote }}
+  IKO_SECURITY_API_AUTHORITIESCLAIM: {{ .Values.settings.iko.security.api.authoritiesClaim | quote }}
 
   SPRING_DATA_REDIS_HOST: {{- if .Values.redis.enabled }}
     {{ printf "%s-redis" (include "iko.fullname" .) | quote }}
