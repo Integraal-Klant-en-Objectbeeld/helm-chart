@@ -205,7 +205,7 @@ settings:
     security:
       admin:
         # -- Claim containing admin roles in OIDC login tokens
-        rolesClaim: "realm_access.roles"
+        rolesClaim: "roles"
         # -- Required admin roles/authorities (comma-separated)
         authorities: "ROLE_ADMIN"
       api:
