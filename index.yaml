@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   iko:
   - apiVersion: v2
+    appVersion: 1.1.4
+    created: "2026-03-10T14:30:31.961715615Z"
+    description: A Helm chart for Integraal Klant Objectbeeld (IKO)
+    digest: 746d84518086d90551e59d0383a8ca9ce9d4b9ed71f62b86b522285065fca13a
+    name: iko
+    type: application
+    urls:
+    - https://github.com/Integraal-Klant-en-Objectbeeld/helm-chart/releases/download/iko-1.1.5/iko-1.1.5.tgz
+    version: 1.1.5
+  - apiVersion: v2
     appVersion: 1.1.3
     created: "2026-03-10T10:27:45.994101016Z"
     description: A Helm chart for Integraal Klant Objectbeeld (IKO)
@@ -131,4 +141,4 @@ entries:
     urls:
     - https://github.com/Integraal-Klant-en-Objectbeeld/helm-chart/releases/download/iko-0.1.0/iko-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-10T10:27:45.994207285Z"
+generated: "2026-03-10T14:30:31.961807703Z"
