@@ -1,6 +1,6 @@
 # iko
 
-![Version: 1.1.5](https://img.shields.io/badge/Version-1.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.4](https://img.shields.io/badge/AppVersion-1.1.4-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -76,11 +76,17 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | redis.image.tag | string | `"8.4.0"` | Redis image tag |
 | redis.nodeSelector | object | `{}` |  |
 | redis.replicaCount | int | `1` | Number of Redis replicas |
-| redis.resources | object | `{}` |  |
+| redis.resources.limits.cpu | string | `"250m"` |  |
+| redis.resources.limits.memory | string | `"128Mi"` |  |
+| redis.resources.requests.cpu | string | `"50m"` |  |
+| redis.resources.requests.memory | string | `"64Mi"` |  |
 | redis.service.port | int | `6379` | Port Redis listens on |
 | redis.tolerations | list | `[]` |  |
 | replicaCount | int | `1` | Amount of replicas running IKO |
-| resources | object | `{}` |  |
+| resources.limits.cpu | string | `"2000m"` |  |
+| resources.limits.memory | string | `"2Gi"` |  |
+| resources.requests.cpu | string | `"500m"` |  |
+| resources.requests.memory | string | `"1536Mi"` |  |
 | securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | securityContext.readOnlyRootFilesystem | bool | `false` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
