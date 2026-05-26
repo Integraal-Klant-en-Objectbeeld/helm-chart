@@ -1,6 +1,6 @@
 # iko
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
+![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -15,6 +15,8 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | autoscaling.targetMemoryUtilizationPercentage | string | `nil` |  |
 | existingSecret | string | `nil` |  |
+| extraConfigMaps | list | `[]` | List of ConfigMaps to create (when `extraConfigMapsEnabled=true`) and inject into the pod. Each entry supports: `name` (required), `mode` (env/mount/both, default: both), `mountPath` (default: /config/<name>), `data` (map of key → content). NOTE: env vars set elsewhere in this chart take precedence over values in a mounted application.yaml. Example: ```yaml - name: my-app-config   mode: both   mountPath: /app/config   data:     application.yaml: |       server.port: 8080 ``` |
+| extraConfigMapsEnabled | bool | `true` | Set to false to reference pre-existing ConfigMaps without having the chart create them. |
 | extraEnvVars | list | `[]` | Extra environment variables to inject into the container |
 | extraVolumeMounts | list | `[]` | Additional volume mounts for the main container |
 | extraVolumes | list | `[]` | Additional volumes to attach to the pod |
