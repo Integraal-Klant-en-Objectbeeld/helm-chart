@@ -1,0 +1,16 @@
+{{- if and .Values.extraConfigMapsEnabled .Values.extraConfigMaps }}
+{{- range .Values.extraConfigMaps }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "iko.labels" $ | nindent 4 }}
+data:
+  {{- range $key, $value := .data }}
+  {{ $key }}: |
+    {{- $value | nindent 4 }}
+  {{- end }}
+---
+{{- end }}
+{{- end }}

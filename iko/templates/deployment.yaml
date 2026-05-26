@@ -21,6 +21,9 @@ spec:
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- if .Values.extraConfigMaps }}
+        checksum/extra-configmaps: {{ toYaml .Values.extraConfigMaps | sha256sum }}
+        {{- end }}
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -37,21 +40,34 @@ spec:
       serviceAccountName: {{ include "iko.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
           envFrom:
             - secretRef:
                 name: {{ .Values.existingSecret | default (include "iko.fullname" .) }}
             - configMapRef:
                 name: {{ include "iko.fullname" . }}
+            {{- if .Values.extraConfigMaps }}
+            {{- range .Values.extraConfigMaps }}
+            {{- $mode := .mode | default "both" }}
+            {{- if or (eq $mode "env") (eq $mode "both") }}
+            - configMapRef:
+                name: {{ .name }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+
           env:
             {{- if .Values.extraEnvVars }}
             {{- include "iko.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
+
           ports:
             - name: admin-port
               containerPort: 8080
@@ -74,14 +90,37 @@ spec:
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.extraVolumeMounts }}
+
           volumeMounts:
+            {{- if .Values.extraVolumeMounts }}
             {{- include "iko.tplvalues.render" ( dict "value" .Values.extraVolumeMounts "context" $ ) | nindent 12 }}
-          {{- end }}
-      {{- if .Values.extraVolumes }}
+            {{- end }}
+            {{- if .Values.extraConfigMaps }}
+            {{- range .Values.extraConfigMaps }}
+            {{- $mode := .mode | default "both" }}
+            {{- if or (eq $mode "mount") (eq $mode "both") }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath | default (printf "/config/%s" .name) }}
+              readOnly: true
+            {{- end }}
+            {{- end }}
+            {{- end }}
+
       volumes:
+        {{- if .Values.extraVolumes }}
         {{- include "iko.tplvalues.render" ( dict "value" .Values.extraVolumes "context" $ ) | nindent 8 }}
-      {{- end }}
+        {{- end }}
+        {{- if .Values.extraConfigMaps }}
+        {{- range .Values.extraConfigMaps }}
+        {{- $mode := .mode | default "both" }}
+        {{- if or (eq $mode "mount") (eq $mode "both") }}
+        - name: {{ .name }}
+          configMap:
+            name: {{ .name }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

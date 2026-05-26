@@ -237,3 +237,22 @@ redis:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+
+# -- extraConfigMapsEnabled: controls whether ConfigMap resources are created by this chart.
+# -- Set to false to reference pre-existing ConfigMaps without having the chart create them.
+extraConfigMapsEnabled: true
+
+# -- List of ConfigMaps to create (when `extraConfigMapsEnabled=true`) and inject into the pod.
+# Each entry supports: `name` (required), `mode` (env/mount/both, default: both),
+# `mountPath` (default: /config/<name>), `data` (map of key → content).
+# NOTE: env vars set elsewhere in this chart take precedence over values in a mounted application.yaml.
+# Example:
+# ```yaml
+# - name: my-app-config
+#   mode: both
+#   mountPath: /app/config
+#   data:
+#     application.yaml: |
+#       server.port: 8080
+# ```
+extraConfigMaps: []
