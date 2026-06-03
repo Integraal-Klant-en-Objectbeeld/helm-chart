@@ -204,9 +204,16 @@ settings:
         rolesClaim: "roles"
         # -- Required admin roles/authorities (comma-separated)
         authorities: "ROLE_ADMIN"
+        session:
+          # -- Admin session timeout duration. Must use Spring duration format (e.g., 30m, 1h).
+          timeout: "30m"
+          # -- Time before session expiry to show the timeout warning modal.
+          warningBefore: "2m"
       api:
         # -- Claim containing API authorities in JWT access tokens
         authoritiesClaim: "resource_access.iko.roles"
+      # -- Secure flag for session cookie (JSESSIONID and XSRF-TOKEN). Set to true when running behind HTTPS.
+      sessionCookieSecure: false
     # -- Base64-encoded 256-bit random key for AES encryption
     # -- Generate a key, by e.g.: openssl rand -base64 32
     # -- Or, if using existingSecret: `IKO_CRYPTO_KEY`

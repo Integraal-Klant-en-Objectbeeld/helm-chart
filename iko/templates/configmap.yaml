@@ -21,6 +21,9 @@ data:
   IKO_SECURITY_ADMIN_ROLESCLAIM: {{ .Values.settings.iko.security.admin.rolesClaim | quote }}
   IKO_SECURITY_ADMIN_AUTHORITIES: {{ .Values.settings.iko.security.admin.authorities | quote }}
   IKO_SECURITY_API_AUTHORITIESCLAIM: {{ .Values.settings.iko.security.api.authoritiesClaim | quote }}
+  IKO_SECURITY_ADMIN_SESSION_TIMEOUT: {{ .Values.settings.iko.security.admin.session.timeout | quote }}
+  IKO_SECURITY_ADMIN_SESSION_WARNINGBEFORE: {{ .Values.settings.iko.security.admin.session.warningBefore | quote }}
+  SERVER_SERVLET_SESSION_COOKIE_SECURE: {{ .Values.settings.iko.security.sessionCookieSecure | quote }}
 
   SPRING_DATA_REDIS_HOST: {{- if .Values.redis.enabled }}
     {{ printf "%s-redis" (include "iko.fullname" .) | quote }}
