@@ -44,7 +44,6 @@ securityContext:
 service:
   type: ClusterIP
   port: 80
-  management: true
 
 ingress:
   enabled: false
@@ -159,6 +158,12 @@ monitoring:
     scrapeTimeout: ""
 
 settings:
+  management:
+    # -- Enable the Spring Boot Actuator management port (health probes + metrics)
+    enabled: true
+    # -- Port the Actuator management endpoints listen on
+    port: 9090
+
   spring:
     datasource: 
       # -- URL for the postgresql database

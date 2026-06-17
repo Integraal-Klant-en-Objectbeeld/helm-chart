@@ -88,7 +88,6 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | securityContext.readOnlyRootFilesystem | bool | `false` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `1000` |  |
-| service.management | bool | `true` |  |
 | service.port | int | `80` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
@@ -106,6 +105,8 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | settings.keycloak.clientID | string | `""` | Client-ID to connect with Keycloak |
 | settings.keycloak.clientSecret | string | `""` | Or, if using existingSecret: `SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAKAPI_CLIENTSECRET` |
 | settings.keycloak.realm | string | `""` | Keycloak realm - Required |
+| settings.management.enabled | bool | `true` | Enable the Spring Boot Actuator management port (health probes + metrics) |
+| settings.management.port | int | `9090` | Port the Actuator management endpoints listen on |
 | settings.redis.host | string | `nil` |  |
 | settings.redis.port | string | `nil` |  |
 | settings.spring.datasource.driverClassName | string | `"org.postgresql.Driver"` | Driver for the postgresql database |

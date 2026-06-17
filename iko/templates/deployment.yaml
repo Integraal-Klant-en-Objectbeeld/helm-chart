@@ -72,9 +72,11 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+            {{- if .Values.settings.management.enabled }}
             - name: management
-              containerPort: 9090
+              containerPort: {{ .Values.settings.management.port }}
               protocol: TCP
+            {{- end }}
 
           {{- with .Values.startupProbe }}
           startupProbe:
