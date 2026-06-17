@@ -67,36 +67,28 @@ ingress:
   #    hosts:
   #      - iko.example.com
 
-ports:
-- name: admin-port
-  containerPort: 8080
-
 startupProbe:
   httpGet:
-    path: /admin
-    port: admin-port
-  initialDelaySeconds: 5
+    path: /actuator/health
+    port: management
+  failureThreshold: 90
   periodSeconds: 10
-  failureThreshold: 30
 
 livenessProbe:
   httpGet:
-    path: /admin
-    port: admin-port
-  initialDelaySeconds: 10
-  periodSeconds: 30
-  timeoutSeconds: 1
-  failureThreshold: 3
-  successThreshold: 1
+    path: /actuator/health/liveness
+    port: management
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  failureThreshold: 6
 
 readinessProbe:
   httpGet:
-    path: /admin
-    port: admin-port
+    path: /actuator/health/readiness
+    port: management
+  initialDelaySeconds: 120
   periodSeconds: 10
-  timeoutSeconds: 1
-  failureThreshold: 3
-  successThreshold: 1
+  failureThreshold: 6
 
 # -- Extra environment variables to inject into the container
 extraEnvVars: []
@@ -166,6 +158,12 @@ monitoring:
     scrapeTimeout: ""
 
 settings:
+  management:
+    # -- Enable the Spring Boot Actuator management port (health probes + metrics)
+    enabled: true
+    # -- Port the Actuator management endpoints listen on
+    port: 9090
+
   spring:
     datasource: 
       # -- URL for the postgresql database

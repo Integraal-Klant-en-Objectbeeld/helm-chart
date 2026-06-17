@@ -8,13 +8,13 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: admin-port
+      targetPort: http
       protocol: TCP
-      name: admin-port
+      name: http
   selector:
     {{- include "iko.selectorLabels" . | nindent 4 }}
 ---
-{{- if .Values.service.management }}
+{{- if .Values.settings.management.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -24,7 +24,7 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.settings.management.port }}
       targetPort: management
       protocol: TCP
       name: management
