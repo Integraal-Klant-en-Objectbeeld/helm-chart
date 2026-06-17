@@ -32,6 +32,11 @@ data:
   IKO_SECURITY_ADMIN_SESSION_WARNINGBEFORE: {{ .Values.settings.iko.security.admin.session.warningBefore | quote }}
   SERVER_SERVLET_SESSION_COOKIE_SECURE: {{ .Values.settings.iko.security.sessionCookieSecure | quote }}
 
+  # Logging configuratie
+  IKO_LOGGING_RETENTION: {{ .Values.settings.iko.logging.retention | quote }}
+  IKO_LOGGING_DELETIONCRON: {{ .Values.settings.iko.logging.deletionCron | quote }}
+  IKO_LOGGING_DB_ENABLED: {{ .Values.settings.iko.logging.db.enabled | quote }}
+
   SPRING_DATA_REDIS_HOST: {{- if .Values.redis.enabled }}
     {{ printf "%s-redis" (include "iko.fullname" .) | quote }}
   {{- else }}

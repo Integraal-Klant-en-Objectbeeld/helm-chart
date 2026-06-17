@@ -94,6 +94,9 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | If not set and create is true, a name is generated using the fullname template |
 | settings.iko.cryptoKey | string | `""` | Or, if using existingSecret: `IKO_CRYPTO_KEY` |
+| settings.iko.logging.db.enabled | bool | `false` | Enable/disable storing logs in the database |
+| settings.iko.logging.deletionCron | string | `"0 0 4 * * ?"` | Cron expression for the log deletion job |
+| settings.iko.logging.retention | string | `"21d"` | Retention period for logs |
 | settings.iko.security.admin.authorities | string | `"ROLE_ADMIN"` | Required admin roles/authorities (comma-separated) |
 | settings.iko.security.admin.rolesClaim | string | `"roles"` | Claim containing admin roles in OIDC login tokens |
 | settings.iko.security.admin.session.timeout | string | `"30m"` | Admin session timeout duration. Must use Spring duration format (e.g., 30m, 1h). |
