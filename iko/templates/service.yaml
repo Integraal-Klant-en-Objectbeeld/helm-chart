@@ -24,7 +24,7 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: 9090
       targetPort: management
       protocol: TCP
       name: management

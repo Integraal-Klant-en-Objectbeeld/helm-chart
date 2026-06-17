@@ -14,14 +14,7 @@ spec:
     matchNames:
     - {{ .Release.Namespace | quote }}
   podMetricsEndpoints:
-  - basicAuth:
-      password:
-        key: SPRINGACTUATOR_PASSWORD
-        name: {{ include "iko.fullname" . }}
-      username:
-        key: SPRINGACTUATOR_USERNAME
-        name: {{ include "iko.fullname" . }}
-    path: /management/prometheus
+  - path: /actuator/prometheus
     port: management
     {{- if .Values.monitoring.podMonitor.interval }}
     interval: {{ .Values.monitoring.podMonitor.interval }}

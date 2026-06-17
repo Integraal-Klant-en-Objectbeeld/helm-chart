@@ -38,13 +38,11 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | ingress.hosts[0].paths[3].path | string | `"/login/oauth2"` |  |
 | ingress.hosts[0].paths[3].pathType | string | `"Prefix"` |  |
 | ingress.tls | list | `[]` |  |
-| livenessProbe.failureThreshold | int | `3` |  |
-| livenessProbe.httpGet.path | string | `"/admin"` |  |
-| livenessProbe.httpGet.port | string | `"admin-port"` |  |
-| livenessProbe.initialDelaySeconds | int | `10` |  |
-| livenessProbe.periodSeconds | int | `30` |  |
-| livenessProbe.successThreshold | int | `1` |  |
-| livenessProbe.timeoutSeconds | int | `1` |  |
+| livenessProbe.failureThreshold | int | `6` |  |
+| livenessProbe.httpGet.path | string | `"/actuator/health/liveness"` |  |
+| livenessProbe.httpGet.port | string | `"management"` |  |
+| livenessProbe.initialDelaySeconds | int | `120` |  |
+| livenessProbe.periodSeconds | int | `10` |  |
 | monitoring.podMonitor.enabled | bool | `false` |  |
 | monitoring.podMonitor.interval | string | `""` | Interval between Prometheus scrapes |
 | monitoring.podMonitor.scrapeTimeout | string | `""` | Scrape timeout for the PodMonitor |
@@ -63,14 +61,11 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
 | podSecurityContext.fsGroup | int | `1000` |  |
-| ports[0].containerPort | int | `8080` |  |
-| ports[0].name | string | `"admin-port"` |  |
-| readinessProbe.failureThreshold | int | `3` |  |
-| readinessProbe.httpGet.path | string | `"/admin"` |  |
-| readinessProbe.httpGet.port | string | `"admin-port"` |  |
+| readinessProbe.failureThreshold | int | `6` |  |
+| readinessProbe.httpGet.path | string | `"/actuator/health/readiness"` |  |
+| readinessProbe.httpGet.port | string | `"management"` |  |
+| readinessProbe.initialDelaySeconds | int | `120` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
-| readinessProbe.successThreshold | int | `1` |  |
-| readinessProbe.timeoutSeconds | int | `1` |  |
 | redis.affinity | object | `{}` |  |
 | redis.enabled | bool | `true` | Enable/disable the bundled Redis deployment |
 | redis.image.pullPolicy | string | `"IfNotPresent"` | Redis image pull policy |
@@ -93,6 +88,7 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | securityContext.readOnlyRootFilesystem | bool | `false` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `1000` |  |
+| service.management | bool | `true` |  |
 | service.port | int | `80` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
@@ -117,10 +113,9 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | settings.spring.datasource.url | string | `""` | URL for the postgresql database |
 | settings.spring.datasource.username | string | `""` | Username for the postgresql database |
 | settings.spring.jpa.properties.hibernateDialect | string | `"org.hibernate.dialect.PostgreSQLDialect"` |  |
-| startupProbe.failureThreshold | int | `30` |  |
-| startupProbe.httpGet.path | string | `"/admin"` |  |
-| startupProbe.httpGet.port | string | `"admin-port"` |  |
-| startupProbe.initialDelaySeconds | int | `5` |  |
+| startupProbe.failureThreshold | int | `90` |  |
+| startupProbe.httpGet.path | string | `"/actuator/health"` |  |
+| startupProbe.httpGet.port | string | `"management"` |  |
 | startupProbe.periodSeconds | int | `10` |  |
 | tolerations | list | `[]` |  |
 

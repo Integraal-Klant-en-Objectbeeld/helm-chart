@@ -44,6 +44,7 @@ securityContext:
 service:
   type: ClusterIP
   port: 80
+  management: true
 
 ingress:
   enabled: false
@@ -66,10 +67,6 @@ ingress:
   #  - secretName: iko-example-tls
   #    hosts:
   #      - iko.example.com
-
-ports:
-- name: admin-port
-  containerPort: 8080
 
 startupProbe:
   httpGet:
