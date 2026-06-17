@@ -217,13 +217,12 @@ settings:
     # -- Or, if using existingSecret: `IKO_CRYPTO_KEY`
     cryptoKey: ""
     logging:
+      # -- Enable/disable storing logs in the database
+      enabled: false
       # -- Retention period for logs
       retention: "21d"
       # -- Cron expression for the log deletion job
       deletionCron: "0 0 4 * * ?"
-      db:
-        # -- Enable/disable storing logs in the database
-        enabled: false
 
 redis:
   # -- Enable/disable the bundled Redis deployment
