@@ -8,9 +8,9 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: admin-port
+      targetPort: http
       protocol: TCP
-      name: admin-port
+      name: http
   selector:
     {{- include "iko.selectorLabels" . | nindent 4 }}
 ---

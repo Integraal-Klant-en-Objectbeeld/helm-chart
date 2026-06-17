@@ -69,8 +69,11 @@ spec:
             {{- end }}
 
           ports:
-            - name: admin-port
+            - name: http
               containerPort: 8080
+              protocol: TCP
+            - name: management
+              containerPort: 9090
               protocol: TCP
 
           {{- with .Values.startupProbe }}

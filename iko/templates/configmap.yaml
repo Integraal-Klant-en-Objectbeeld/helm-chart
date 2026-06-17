@@ -8,6 +8,11 @@ data:
   # Spring Boot configuratie
   SERVER_PORT: {{ .Values.settings.iko.serverPort | quote }}
 
+  # Spring Boot Actuator / management configuratie
+  MANAGEMENT_SERVER_PORT: "9090"
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,prometheus"
+
   # Database configuratie
   SPRING_DATASOURCE_URL: {{ .Values.settings.spring.datasource.url | quote }}
   SPRING_DATASOURCE_USERNAME: {{ .Values.settings.spring.datasource.username | quote }}
