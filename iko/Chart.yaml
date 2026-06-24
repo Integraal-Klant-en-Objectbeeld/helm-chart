@@ -3,4 +3,4 @@ appVersion: 1.4.1
 description: A Helm chart for Integraal Klant Objectbeeld (IKO)
 name: iko
 type: application
-version: 1.6.0
+version: 1.6.1
