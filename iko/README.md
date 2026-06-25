@@ -101,7 +101,6 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | settings.iko.security.admin.rolesClaim | string | `"roles"` | Claim containing admin roles in OIDC login tokens |
 | settings.iko.security.admin.session.timeout | string | `"30m"` | Admin session timeout duration. Must use Spring duration format (e.g., 30m, 1h). |
 | settings.iko.security.admin.session.warningBefore | string | `"2m"` | Time before session expiry to show the timeout warning modal. |
-| settings.iko.security.api.authoritiesClaim | string | `"resource_access.iko.roles"` | Claim containing API authorities in JWT access tokens |
 | settings.iko.security.sessionCookieSecure | bool | `false` | Secure flag for session cookie (JSESSIONID and XSRF-TOKEN). Set to true when running behind HTTPS. |
 | settings.iko.serverPort | int | `8080` | Port IKO listens on |
 | settings.keycloak.authServerURL | string | `""` | URL of Keycloak - Required |
