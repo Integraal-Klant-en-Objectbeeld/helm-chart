@@ -208,8 +208,10 @@ settings:
           # -- Time before session expiry to show the timeout warning modal.
           warningBefore: "2m"
       api:
-        # -- Claim containing API authorities in JWT access tokens
-        authoritiesClaim: "resource_access.iko.roles"
+        # -- Name of the JWT claim containing API authorities/roles
+        authoritiesClaimName: "[resource_access][iko][roles]"
+        # -- Accepted JWT audiences for API access tokens (comma-separated). Leave empty to disable audience validation.
+        audiences: "iko"
       # -- Secure flag for session cookie (JSESSIONID and XSRF-TOKEN). Set to true when running behind HTTPS.
       sessionCookieSecure: false
     # -- Base64-encoded 256-bit random key for AES encryption
