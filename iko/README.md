@@ -1,6 +1,6 @@
 # iko
 
-![Version: 1.6.2](https://img.shields.io/badge/Version-1.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.2](https://img.shields.io/badge/AppVersion-1.4.2-informational?style=flat-square)
+![Version: 1.6.3](https://img.shields.io/badge/Version-1.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.2](https://img.shields.io/badge/AppVersion-1.4.2-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -37,6 +37,10 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | ingress.hosts[0].paths[2].pathType | string | `"Prefix"` |  |
 | ingress.hosts[0].paths[3].path | string | `"/login/oauth2"` |  |
 | ingress.hosts[0].paths[3].pathType | string | `"Prefix"` |  |
+| ingress.hosts[0].paths[4].path | string | `"/endpoints"` |  |
+| ingress.hosts[0].paths[4].pathType | string | `"Prefix"` |  |
+| ingress.hosts[0].paths[5].path | string | `"/aggregated-data-profiles"` |  |
+| ingress.hosts[0].paths[5].pathType | string | `"Prefix"` |  |
 | ingress.tls | list | `[]` |  |
 | livenessProbe.failureThreshold | int | `6` |  |
 | livenessProbe.httpGet.path | string | `"/actuator/health/liveness"` |  |
