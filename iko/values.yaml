@@ -62,6 +62,10 @@ ingress:
           pathType: Prefix
         - path: /login/oauth2
           pathType: Prefix
+        - path: /endpoints
+          pathType: Prefix
+        - path: /aggregated-data-profiles
+          pathType: Prefix
   tls: []
   #  - secretName: iko-example-tls
   #    hosts:
@@ -165,7 +169,7 @@ settings:
     port: 9090
 
   spring:
-    datasource: 
+    datasource:
       # -- URL for the postgresql database
       url: ""
       # -- Username for the postgresql database
@@ -178,7 +182,7 @@ settings:
       properties:
         hibernateDialect: "org.hibernate.dialect.PostgreSQLDialect"
 
-  keycloak: 
+  keycloak:
     # -- URL of Keycloak - Required
     authServerURL: ""
     # -- Keycloak realm - Required
@@ -191,7 +195,7 @@ settings:
 
   redis:
     host:
-    port: 
+    port:
 
   iko:
     # -- Port IKO listens on
