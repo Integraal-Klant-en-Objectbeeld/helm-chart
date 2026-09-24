@@ -38,6 +38,9 @@ data:
   IKO_LOGGING_DELETIONCRON: {{ .Values.settings.iko.logging.deletionCron | quote }}
   IKO_LOGGING_DB_ENABLED: {{ .Values.settings.iko.logging.enabled | quote }}
 
+  # Debug configuratie
+  IKO_DEBUG_SHOW_HEADERS: {{ .Values.settings.iko.debug.showHeaders | quote }}
+
   SPRING_DATA_REDIS_HOST: {{- if .Values.redis.enabled }}
     {{ printf "%s-redis" (include "iko.fullname" .) | quote }}
   {{- else }}

@@ -1,6 +1,6 @@
 # iko
 
-![Version: 1.6.2](https://img.shields.io/badge/Version-1.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.2](https://img.shields.io/badge/AppVersion-1.4.2-informational?style=flat-square)
+![Version: 1.7.0](https://img.shields.io/badge/Version-1.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.0](https://img.shields.io/badge/AppVersion-1.5.0-informational?style=flat-square)
 
 A Helm chart for Integraal Klant Objectbeeld (IKO)
 
@@ -94,6 +94,7 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | If not set and create is true, a name is generated using the fullname template |
 | settings.iko.cryptoKey | string | `""` | Or, if using existingSecret: `IKO_CRYPTO_KEY` |
+| settings.iko.debug.showHeaders | bool | `false` | Show raw header values in the ADP debug trace viewer. When false (default) every header value is masked so credentials never reach the browser. Only enable in non-production environments, or temporarily while debugging. |
 | settings.iko.logging.deletionCron | string | `"0 0 4 * * ?"` | Cron expression for the log deletion job |
 | settings.iko.logging.enabled | bool | `false` | Enable/disable storing logs in the database |
 | settings.iko.logging.retention | string | `"21d"` | Retention period for logs |
