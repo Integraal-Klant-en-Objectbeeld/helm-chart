@@ -70,13 +70,15 @@ A Helm chart for Integraal Klant Objectbeeld (IKO)
 | redis.enabled | bool | `true` | Enable/disable the bundled Redis deployment |
 | redis.image.pullPolicy | string | `"IfNotPresent"` | Redis image pull policy |
 | redis.image.repository | string | `"docker.io/redis"` | Redis image repository |
-| redis.image.tag | string | `"8.4.0"` | Redis image tag |
+| redis.image.tag | string | `"8.4.0-alpine"` | Redis image tag |
 | redis.nodeSelector | object | `{}` |  |
+| redis.podSecurityContext | object | `{"fsGroup":999,"runAsGroup":999,"runAsNonRoot":true,"runAsUser":999,"seccompProfile":{"type":"RuntimeDefault"}}` | Pod-level security context for Redis |
 | redis.replicaCount | int | `1` | Number of Redis replicas |
 | redis.resources.limits.cpu | string | `"250m"` |  |
 | redis.resources.limits.memory | string | `"128Mi"` |  |
 | redis.resources.requests.cpu | string | `"50m"` |  |
 | redis.resources.requests.memory | string | `"64Mi"` |  |
+| redis.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}}` | Container-level security context for Redis |
 | redis.service.port | int | `6379` | Port Redis listens on |
 | redis.tolerations | list | `[]` |  |
 | replicaCount | int | `1` | Amount of replicas running IKO |
