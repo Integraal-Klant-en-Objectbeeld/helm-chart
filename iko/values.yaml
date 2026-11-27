@@ -241,7 +241,7 @@ redis:
     # -- Redis image repository
     repository: docker.io/redis
     # -- Redis image tag
-    tag: "8.4.0"
+    tag: "8.4.0-alpine"
     # -- Redis image pull policy
     pullPolicy: IfNotPresent
   service:
@@ -254,6 +254,20 @@ redis:
     limits:
       memory: 128Mi
       cpu: 250m
+  # -- Pod-level security context for Redis
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 999
+    runAsGroup: 999
+    fsGroup: 999
+    seccompProfile:
+      type: RuntimeDefault
+  # -- Container-level security context for Redis
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
   nodeSelector: {}
   tolerations: []
   affinity: {}
