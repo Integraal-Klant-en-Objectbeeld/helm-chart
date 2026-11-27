@@ -3,6 +3,15 @@ name: Backend - run Helm lint, generate and push README to PR source branch
 on:
   workflow_dispatch:
   pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "iko/**"
+      - ".github/workflows/pr.yaml"
+
+concurrency:
+  group: pr-readme-push-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: false
+
 jobs:
   helm-lint:
     runs-on: ubuntu-latest
@@ -25,17 +34,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update README.md with helm-docs
         env:
           HELM_DOCS_VERSION: v1.14.2
         run: |
-          cd iko && docker run --rm --volume "$(pwd):/helm-docs" -u $(id -u) "jnorwood/helm-docs:${HELM_DOCS_VERSION}"
+          cd iko && docker run --rm --volume "$(pwd):/helm-docs" -u "$(id -u)" "jnorwood/helm-docs:${HELM_DOCS_VERSION}"
 
       - name: Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           git add .
           git config user.name "github-actions[bot]"
@@ -43,6 +54,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "README is up-to-date. No changes to commit."
           else
+            git pull
             git commit -m "Update README.md automatically via GitHub Actions"
-            git push origin HEAD:${{ github.event.pull_request.head.ref }}
+            git push origin "HEAD:${HEAD_REF}"
           fi
